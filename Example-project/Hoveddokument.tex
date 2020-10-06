@@ -1,0 +1,70 @@
+\include{setup/preamble}
+%indsætter alle vores koder og andet opsætning
+
+
+\raggedbottom													
+% Sørger for at LaTeX ikke "strækker" teksten
+
+\begin{document}
+
+
+
+
+%begynder dokumentet
+\input{formalia/Forside}
+%henter forsiden
+
+\input{formalia/titelblad}
+
+%%%Inholdsfortegnelsen%%%
+\phantomsection												
+% Kunstigt afsnit, som hyperlinks kan 'holde fast i'
+\pdfbookmark[0]{Indholdsfortegnelse}{indhold}				
+% Tildeler en klikbar bookmark til den endelige PDF
+\textcolor{black}{\tableofcontents}											
+% Indholdsfortegnelsen
+
+\immediate\write16{No file \jobname.bbl.}
+
+\input{kontekst/indledning}
+%indledningen sættes ind
+
+
+%forforståelsen sættes ind
+ 
+## ---- myrcode1
+# Create a sequence of numbers
+ X = 2:10
+
+## ---- myrcode2
+# Display basic statistical measures
+summary(X)
+
+
+%Redegørelse start
+
+
+
+%Analyse start
+
+
+
+
+%diskussion start
+
+
+
+\input{formalia/Bilag}
+
+\clearpage
+%%%% Kilder %%%%
+
+\begingroup
+    \raggedright
+    \bibliography{bibtex/references.bib}                            % Litteraturlisten inkluderes
+\endgroup
+
+
+
+
+\end{document}

@@ -1,0 +1,125 @@
+\documentclass[danish,a4paper,12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {figure/}}
+\usepackage{url}
+\usepackage[danish]{varioref}
+\usepackage{natbib}
+\usepackage{listings}
+\usepackage{fullpage}
+\usepackage{dcolumn}
+\usepackage{float}
+\usepackage{caption}
+\usepackage[colorlinks=true, hypertexnames=true, linkcolor=black, citecolor=black, urlcolor=black]{hyperref}
+\usepackage[danish]{babel}
+\usepackage{pdflscape}
+\usepackage{rotating}
+\usepackage{comment}
+\usepackage{dcolumn}
+\usepackage{blkarray}
+\usepackage{eurosym}
+\usepackage{titlesec}
+\usepackage{longtable}
+\usepackage[footnote,draft,danish,silent,nomargin]{fixme}
+\usepackage[]{multirow}
+\usepackage{csquotes}
+\usepackage{epstopdf}
+\usepackage{soul}
+\usepackage{float}
+\usepackage{rotfloat}
+\usepackage{subcaption}
+\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{placeins}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata,positioning, fit, calc}
+\tikzset{
+    state/.style={
+           rectangle,
+           rounded corners,
+           draw=black, very thick,
+           minimum height=2em,
+           inner sep=4pt,
+           text centered,
+           },
+}
+\usepackage[T1]{fontenc}
+\usepackage{etoolbox}
+\usepackage[title]{appendix}
+\setlength\parindent{0pt}
+\newcommand{\dd}[1]{\mathrm{d}#1}
+\renewcommand{\subfloat}[2][need a sub-caption]{\subcaptionbox{#1}{#2}}
+\makeatletter
+% make numeric styles use name format
+\patchcmd{\NAT@test}{\else \NAT@nm}{\else \NAT@nmfmt{\NAT@nm}}{}{}
+% define \citepos just like \citet
+\DeclareRobustCommand\citepos
+  {\begingroup
+   \let\NAT@nmfmt\NAT@posfmt% ...except with a different name format
+   \NAT@swafalse\let\NAT@ctype\z@\NAT@partrue
+   \@ifstar{\NAT@fulltrue\NAT@citetp}{\NAT@fullfalse\NAT@citetp}}
+\let\NAT@orig@nmfmt\NAT@nmfmt
+\def\NAT@posfmt#1{\NAT@orig@nmfmt{#1's}}
+\makeatother
+
+\makeatletter
+\AtBeginDocument{%
+  \expandafter\renewcommand\expandafter\subsection\expandafter
+    {\expandafter\@fb@secFB\subsection}%
+  \newcommand\@fb@secFB{\FloatBarrier
+    \gdef\@fb@afterHHook{\@fb@topbarrier \gdef\@fb@afterHHook{}}}%
+  \g@addto@macro\@afterheading{\@fb@afterHHook}%
+  \gdef\@fb@afterHHook{}%
+}
+
+\patchcmd{\maketitle}{\@fnsymbol}{\@arabic}{}{}
+% \patchcmd{\maketitle}{\setcounter{footnote}{0}}{}{}{}
+\makeatother
+
+\makeatletter
+\pgfdeclaregenericanchor{top base}{%
+  \csname pgf@anchor@#1@north\endcsname
+  \pgf@anchor@generic@top@base@main
+}
+\pgfdeclaregenericanchor{top base west}{%
+  \csname pgf@anchor@#1@north west\endcsname
+  \pgf@anchor@generic@top@base@main
+}
+\pgfdeclaregenericanchor{top base east}{%
+  \csname pgf@anchor@#1@north east\endcsname
+  \pgf@anchor@generic@top@base@main
+}
+\def\pgf@anchor@generic@top@base@main{%
+  {%
+    \pgfmathsetlength\pgf@ya{\pgfkeysvalueof{/pgf/outer ysep}}%
+    \advance\pgf@y-\pgf@ya
+    \pgfmathsetlength\pgf@ya{\pgfkeysvalueof{/pgf/inner ysep}}%
+    \advance\pgf@y-\pgf@ya
+    \pgf@ya=0pt
+    \pgfutil@loop
+    \ifdim\pgf@y>\baselineskip
+      \advance\pgf@y-\baselineskip
+      \advance\pgf@ya\baselineskip
+    \pgfutil@repeat
+    \global\pgf@y=\pgf@ya
+  }%
+}
+\makeatother
+\usepackage{setspace}
+\linespread{1,5}
+%linjeafstanden
+\usepackage[nottoc,numbib]{tocbibind}
+% ¤¤ Navngivning ¤¤ %
+\addto\captionsdanish{
+	\renewcommand\contentsname{Indholdsfortegnelse}			% Skriver 'Indholdsfortegnelse' i stedet for 'Indhold'
+	\renewcommand\appendixname{Appendiks}					% Skriver 'Appendiks' i stedet for 'Appendix'
+	\renewcommand\appendixpagename{Appendiks}
+	\renewcommand\appendixtocname{Appendiks}
+}
+\usepackage{lastpage}                       % Lader os referere til sidste side
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\bibliographystyle{formalia/harvard.bst}
